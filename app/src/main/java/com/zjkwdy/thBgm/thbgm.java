@@ -28,6 +28,13 @@ public class thbgm {
         this.bits = bits;
     }
 
+    public void stop() {
+        assert this.playThread != null;
+        this.playThread = null;
+        this.audioTrack.stop();
+        this.audioTrack.release();
+    }
+
     public void setPlayThread(bgmdat dat) {
         this.playThread = new Thread(() -> {
             try {

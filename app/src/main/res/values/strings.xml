@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">Reimu\'s MusicBox</string>
+    <string name="group_name">请起一个合适的名字</string>
     <string name="fmt_default">/storage/emulated/0/thbgm.fmt</string>
     <string name="fmt_text">请输入thbgm.fmt的位置</string>
     <string name="dat_default">/storage/emulated/0/thbgm.dat</string>
     <string name="dat_text">请输入thbgm.dat的位置</string>
     <string name="button_go">GO</string>
+    <string name="button_ok">OK</string>
     <string name="button_play">Play!</string>
     <string name="button_stop">Stop</string>
 </resources>

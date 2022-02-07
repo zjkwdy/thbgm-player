@@ -18,45 +18,33 @@ public class BgmPlayActivity extends AppCompatActivity {
     bgmdat dat;
     Spinner bgmChoose;
     Button playButton;
-    Button stopButton;
     thbgm NowPlaying;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_message);
+        setContentView(R.layout.bgm_play_activity);
 
         Intent intent = getIntent();
         String fmtName = intent.getStringExtra(MainActivity.FMT_NAME);
         String datName = intent.getStringExtra(MainActivity.DAT_NAME);
         this.bgmChoose = findViewById(R.id.sp);
         this.playButton = findViewById(R.id.play_btn);
-        this.stopButton = findViewById(R.id.stop_btn);
         try {
             this.fmt = new thfmt(fmtName);
             this.dat = new bgmdat(datName);
-            String[] bgmNames = this.fmt.bgmNameList.toArray(new String[this.fmt.bgmNameList.size()]);
+            String[] bgmNames = this.fmt.bgmNameList.toArray(new String[0]);
             ArrayAdapter<CharSequence> adapterNames = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, bgmNames);
             bgmChoose.setAdapter(adapterNames);
+            playButton.setOnClickListener(new playOnclick());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    @Override
-    public void onBackPressed() {
-        stop(this.stopButton);
-    }
 
-    public void stop(View view) {
-        this.NowPlaying.audioTrack.stop();
-        this.NowPlaying.audioTrack.release();
-        playButton.setEnabled(true);
-        stopButton.setEnabled(false);
-    }
-
-    public void start(View view) {
+    public void start() {
         String choicedBgmName = bgmChoose.getSelectedItem().toString();
         TextView sT = findViewById(R.id.startTime);
         TextView dT = findViewById(R.id.durTime);
@@ -69,7 +57,23 @@ public class BgmPlayActivity extends AppCompatActivity {
         lS.setText(publicMethods.hex(this.NowPlaying.loopStart));
         sP.setText(publicMethods.str(this.NowPlaying.Sample));
         this.NowPlaying.setPlayThread(dat);
-        playButton.setEnabled(false);
-        stopButton.setEnabled(true);
+    }
+
+    public void stop() {
+        this.NowPlaying.stop();
+    }
+
+    class playOnclick implements View.OnClickListener{
+        @Override
+        public void onClick(View view){
+            Button btn = (Button) view;
+            if (btn.getText() == getString(R.string.button_play)) {
+                start();
+                btn.setText(R.string.button_stop);
+            } else {
+                stop();
+                btn.setText(R.string.button_play);
+            }
+        }
     }
 }

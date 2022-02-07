@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 
 import androidx.core.app.ActivityCompat;
 
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 
 
@@ -18,6 +19,15 @@ public class publicMethods {
     };
 
     public publicMethods() {
+    }
+
+    public static boolean fileIsExists(String filePath){
+        try{
+            File f = new File(filePath);
+            return f.exists();
+        } catch (Exception e){
+            return  false;
+        }
     }
 
     public static String byteToStr(byte[] buffer) {
