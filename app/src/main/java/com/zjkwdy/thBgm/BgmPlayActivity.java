@@ -19,7 +19,7 @@ public class BgmPlayActivity extends AppCompatActivity {
     Spinner bgmChoose;
     Button playButton;
     thbgm NowPlaying;
-
+    Button stop_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,8 @@ public class BgmPlayActivity extends AppCompatActivity {
         String datName = intent.getStringExtra(MainActivity.DAT_NAME);
         this.bgmChoose = findViewById(R.id.sp);
         this.playButton = findViewById(R.id.play_btn);
+        this.stop_btn = findViewById(R.id.stop_btn);
+        this.stop_btn.setEnabled(false);
         try {
             this.fmt = new thfmt(fmtName);
             this.dat = new bgmdat(datName);
@@ -56,11 +58,16 @@ public class BgmPlayActivity extends AppCompatActivity {
         dT.setText(publicMethods.hex(this.NowPlaying.durTime));
         lS.setText(publicMethods.hex(this.NowPlaying.loopStart));
         sP.setText(publicMethods.str(this.NowPlaying.Sample));
+        this.stop_btn.setEnabled(true);
         this.NowPlaying.setPlayThread(dat);
     }
 
-    public void stop() {
+    public void stop(View view) {
         this.NowPlaying.stop();
+        stop_btn.setEnabled(false);
+    }
+    public void pause() {
+        this.NowPlaying.pause();
     }
 
     class playOnclick implements View.OnClickListener{
@@ -71,7 +78,7 @@ public class BgmPlayActivity extends AppCompatActivity {
                 start();
                 btn.setText(R.string.button_stop);
             } else {
-                stop();
+                pause();
                 btn.setText(R.string.button_play);
             }
         }
