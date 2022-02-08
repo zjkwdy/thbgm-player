@@ -76,7 +76,7 @@ public class BgmPlayActivity extends AppCompatActivity {
             Button btn = (Button) view;
             if (btn.getText() == getString(R.string.button_play)) {
                 start();
-                btn.setText(R.string.button_stop);
+                btn.setText(R.string.button_pause);
             } else {
                 pause();
                 btn.setText(R.string.button_play);
