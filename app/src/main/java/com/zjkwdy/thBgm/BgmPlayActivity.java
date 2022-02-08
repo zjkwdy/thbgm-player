@@ -18,7 +18,7 @@ public class BgmPlayActivity extends AppCompatActivity {
     bgmdat dat;
     Spinner bgmChoose;
     Button playButton;
-    thbgm NowPlaying;
+    thbgm NowPlaying = null;
     Button stop_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,12 @@ public class BgmPlayActivity extends AppCompatActivity {
         }
 
     }
-
+    @Override
+    public void onBackPressed(){
+        stop(this.stop_btn);
+        super.onBackPressed();
+        finish();
+    }
 
     public void start() {
         String choicedBgmName = bgmChoose.getSelectedItem().toString();
@@ -64,7 +69,11 @@ public class BgmPlayActivity extends AppCompatActivity {
     }
 
     public void stop(View view) {
+        if(this.NowPlaying==null){
+            return;
+        }
         this.NowPlaying.stop();
+        this.NowPlaying = null;
         this.playButton.setText(R.string.button_play);
         stop_btn.setEnabled(false);
     }
