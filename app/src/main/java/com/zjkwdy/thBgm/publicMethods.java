@@ -21,12 +21,12 @@ public class publicMethods {
     public publicMethods() {
     }
 
-    public static boolean fileIsExists(String filePath){
-        try{
+    public static boolean fileIsExists(String filePath) {
+        try {
             File f = new File(filePath);
             return f.exists();
-        } catch (Exception e){
-            return  false;
+        } catch (Exception e) {
+            return false;
         }
     }
 

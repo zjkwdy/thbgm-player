@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.zjkwdy.thBgm"
         minSdk 23
-        targetSdk 30
+        targetSdk 29
         versionCode 8
         versionName "1.5"
 

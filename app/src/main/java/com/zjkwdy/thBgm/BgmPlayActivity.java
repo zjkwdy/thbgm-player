@@ -20,6 +20,7 @@ public class BgmPlayActivity extends AppCompatActivity {
     Button playButton;
     thbgm NowPlaying = null;
     Button stop_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +45,9 @@ public class BgmPlayActivity extends AppCompatActivity {
         }
 
     }
+
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         stop(this.stop_btn);
         super.onBackPressed();
         finish();
@@ -69,7 +71,7 @@ public class BgmPlayActivity extends AppCompatActivity {
     }
 
     public void stop(View view) {
-        if(this.NowPlaying==null){
+        if (this.NowPlaying == null) {
             return;
         }
         this.NowPlaying.stop();
@@ -77,14 +79,15 @@ public class BgmPlayActivity extends AppCompatActivity {
         this.playButton.setText(R.string.button_play);
         stop_btn.setEnabled(false);
     }
+
     public void pause() {
         this.NowPlaying.pause();
         this.playButton.setText(R.string.button_play);
     }
 
-    class playOnclick implements View.OnClickListener{
+    class playOnclick implements View.OnClickListener {
         @Override
-        public void onClick(View view){
+        public void onClick(View view) {
             Button btn = (Button) view;
             if (btn.getText() == getString(R.string.button_play)) {
                 start();

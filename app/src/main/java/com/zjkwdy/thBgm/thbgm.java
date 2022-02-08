@@ -43,7 +43,7 @@ public class thbgm {
     public void setPlayThread(bgmdat dat) {
         this.playThread = new Thread(() -> {
             try {
-                if(audioTrack==null || audioTrack.getState()!=AudioTrack.STATE_INITIALIZED) {
+                if (audioTrack == null || audioTrack.getState() != AudioTrack.STATE_INITIALIZED) {
                     audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, Sample, AudioFormat.CHANNEL_OUT_STEREO, AudioFormat.ENCODING_PCM_16BIT, durTime, AudioTrack.MODE_STATIC);
                     dat.seek(startTime);
                     byte[] musicBytes = dat.read(durTime);

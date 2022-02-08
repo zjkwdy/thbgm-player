@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Spinner groupChoose;
     private Button goBtn;
     private ImageButton delBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,19 +34,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode,int resultCode,Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         getGroups();
     }
-    public void add(View view){
-        Intent intent = new Intent(this,addBgmGroup.class);
-        startActivityForResult(intent,0);
+
+    public void add(View view) {
+        Intent intent = new Intent(this, addBgmGroup.class);
+        startActivityForResult(intent, 0);
     }
+
     public void getGroups() {
         SharedPreferences sp = getSharedPreferences("groups", Context.MODE_PRIVATE);
         Set<String> allEntries = sp.getAll().keySet();
         String[] groups;
-        if(allEntries.size()==0){
+        if (allEntries.size() == 0) {
             this.goBtn.setEnabled(false);
             this.delBtn.setEnabled(false);
             groups = new String[]{"啥也没有"};
@@ -58,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
         groupChoose.setAdapter(adapterNames);
     }
 
-    public void delGroup(View view){
+    public void delGroup(View view) {
         String selectGroup = this.groupChoose.getSelectedItem().toString();
-        SharedPreferences sp = getSharedPreferences(selectGroup,Context.MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences(selectGroup, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
         editor.commit();
@@ -72,10 +75,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String[] getGroup(String groupName) {
-        SharedPreferences sp = getSharedPreferences(groupName,Context.MODE_PRIVATE);
-        String fmt = sp.getString("fmt","");
-        String dat = sp.getString("dat","");
-        return new String[]{fmt,dat};
+        SharedPreferences sp = getSharedPreferences(groupName, Context.MODE_PRIVATE);
+        String fmt = sp.getString("fmt", "");
+        String dat = sp.getString("dat", "");
+        return new String[]{fmt, dat};
     }
 
     public void processBGM(View view) {
