@@ -59,15 +59,18 @@ public class BgmPlayActivity extends AppCompatActivity {
         lS.setText(publicMethods.hex(this.NowPlaying.loopStart));
         sP.setText(publicMethods.str(this.NowPlaying.Sample));
         this.stop_btn.setEnabled(true);
+        this.playButton.setText(R.string.button_pause);
         this.NowPlaying.setPlayThread(dat);
     }
 
     public void stop(View view) {
         this.NowPlaying.stop();
+        this.playButton.setText(R.string.button_play);
         stop_btn.setEnabled(false);
     }
     public void pause() {
         this.NowPlaying.pause();
+        this.playButton.setText(R.string.button_play);
     }
 
     class playOnclick implements View.OnClickListener{
@@ -76,10 +79,8 @@ public class BgmPlayActivity extends AppCompatActivity {
             Button btn = (Button) view;
             if (btn.getText() == getString(R.string.button_play)) {
                 start();
-                btn.setText(R.string.button_pause);
             } else {
                 pause();
-                btn.setText(R.string.button_play);
             }
         }
     }
